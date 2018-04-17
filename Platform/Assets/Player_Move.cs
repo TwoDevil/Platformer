@@ -6,14 +6,19 @@ using UnityEngine;
 public class Player_Move : MonoBehaviour {
 
     public int playerSpeed=10;
-   private bool facingRight=false;
+    private bool facingRight=false;
     public int playerJumpPower=300;
     private float moveX;
     public Rigidbody2D playerRigidbody;
-	
+
+    public bool isGround;
+    public bool isJumpFirst;
+
     void Start()
     {
-        playerRigidbody = gameObject.GetComponent<Rigidbody2D>();
+        isGround = true;
+        isJumpFirst = true;
+           playerRigidbody = gameObject.GetComponent<Rigidbody2D>();
     }
 
 
@@ -28,6 +33,7 @@ public class Player_Move : MonoBehaviour {
         moveX = Input.GetAxis("Horizontal");
         if(Input.GetButtonDown("Jump"))
         {
+            if(isGround|| isJumpFirst)
             Jump();
         }
         //animation
@@ -55,6 +61,24 @@ public class Player_Move : MonoBehaviour {
     void Jump()
     {
         //jumping
-        GetComponent<Rigidbody2D>().AddForce(Vector2.up*playerJumpPower );
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpPower);
+        if (isGround)
+        {
+            isGround = false;
+        }
+        else if(isJumpFirst)
+        {
+            isJumpFirst = false;
+        }
+
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Player has collided with " + collision.collider.name);
+        if (collision.collider.name == "Layer1")
+        {
+            isGround = true;
+            isJumpFirst = true;
+        }
     }
 }
