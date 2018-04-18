@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Player_Health : MonoBehaviour {
 
-    public int health;
+    public int health = 100;
 	// Use this for initialization
 	void Start () {
     }
@@ -20,6 +20,14 @@ public class Player_Health : MonoBehaviour {
     void Die()
     {
         SceneManager.LoadScene("Prototype_1");
+    }
+    public void AddDamage(int i)
+    {
+        health -= i;
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
 }
