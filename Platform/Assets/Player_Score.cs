@@ -23,4 +23,20 @@ public class Player_Score : MonoBehaviour {
             SceneManager.LoadScene("Prototype_1");
         }
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Coin")
+        {
+            CountScore(100);
+            Destroy(collision.gameObject);
+        }
+
+    }
+    private void CountScore(int score=0)
+    {
+        playerScore += score;
+        playerScoreUI.gameObject.GetComponent<Text>().text = ("Счет: " + playerScore);
+    }
+
 }

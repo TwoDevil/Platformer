@@ -25,7 +25,9 @@ public class Player_Move : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         PlyerMove();
-	}
+        PlayerRayCast();
+
+    }
 
      void PlyerMove()
     {
@@ -80,5 +82,18 @@ public class Player_Move : MonoBehaviour {
             isGround = true;
             isJumpFirst = true;
         }
+    }
+    
+    void PlayerRayCast()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
+        if (hit.distance < 0.9f && hit.collider.gameObject.tag=="Enemy")
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpPower);
+            isGround = true;
+            isJumpFirst = true;
+            Destroy(hit.collider.gameObject);
+        }
+
     }
 }
