@@ -63,6 +63,7 @@ public class Player_Move : MonoBehaviour {
     void Jump()
     {
         //jumping
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpPower);
         if (isGround)
         {

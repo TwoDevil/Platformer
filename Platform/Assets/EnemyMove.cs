@@ -21,13 +21,12 @@ public class EnemyMove : MonoBehaviour {
         {
             if (XMoveDirection < 0)
             {
-                hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 500);
+                hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce((Vector2.left+Vector2.up/2) * 1000);
             }
             else
             {
-                hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 500);
+                hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce((Vector2.right + Vector2.up / 2) * 1000);
             }
-            hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 300);
             hit.collider.gameObject.GetComponent<Player_Health>().AddDamage(10);
         }
         else
