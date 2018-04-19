@@ -78,7 +78,7 @@ public class Player_Move : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Player has collided with " + collision.collider.name);
-        if (collision.collider.gameObject.tag == "Ground")
+        if (collision.collider.name == "Layer1")
         {
             isGround = true;
             isJumpFirst = true;
@@ -87,18 +87,46 @@ public class Player_Move : MonoBehaviour {
     
     void PlayerRayCast()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
-        if (hit.collider!=null)
+        //ray up
+        RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up);
+        if (rayUp.collider != null && rayUp.distance < 1.3f && rayUp.collider.name == "box2")
         {
-            //Debug.Log(hit.collider.gameObject.tag);
-            if (hit.distance < 1.3f && hit.collider.gameObject.tag == "Enemy")
-            {
-                GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpPower);
-                isGround = true;
-                isJumpFirst = true;
-                Destroy(hit.collider.gameObject);
-            }
+            Destroy(rayUp.collider.gameObject);
         }
+
+        //ray down
+        RaycastHit2D rayDawn = Physics2D.Raycast(transform.position, Vector2.down);
+        if (rayDawn.collider != null && rayDawn.distance < 1.3f && rayDawn.collider.gameObject.tag == "Enemy")
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * 1000);
+            rayDawn.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 200);
+            rayDawn.collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 8;
+            rayDawn.collider.gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
+            rayDawn.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            rayDawn.collider.gameObject.GetComponent<EnemyMove>().enabled = false;
+        }
+        if(rayDawn != null && rayDawn.collider != null && rayDawn.distance<0.9f && rayDawn.collider.gameObject.tag == "Enemy")
+        {
+            isGround = true;
+        }
+
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
+        //if (hit.collider!=null)
+        //{
+        //    Debug.Log(hit.collider.gameObject.tag);
+        //    if (hit.distance < 1.3f && hit.collider.gameObject.tag == "Enemy")
+        //    {
+        //        GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpPower);
+        //        hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 200);
+        //        hit.collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 20;
+        //        hit.collider.gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
+        //        hit.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        //        hit.collider.gameObject.GetComponent<EnemyMove>().enabled = false;
+        //        isGround = true;
+        //        isJumpFirst = true;
+        //        Destroy(hit.collider.gameObject);
+        //    }
+        //}
 
     }
 }
