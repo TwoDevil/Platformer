@@ -78,7 +78,7 @@ public class Player_Move : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Player has collided with " + collision.collider.name);
-        if (collision.collider.name == "Layer1")
+        if (collision.collider.gameObject.tag == "Ground")
         {
             isGround = true;
             isJumpFirst = true;
@@ -90,7 +90,7 @@ public class Player_Move : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
         if (hit.collider!=null)
         {
-            Debug.Log(hit.collider.gameObject.tag);
+            //Debug.Log(hit.collider.gameObject.tag);
             if (hit.distance < 1.3f && hit.collider.gameObject.tag == "Enemy")
             {
                 GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpPower);

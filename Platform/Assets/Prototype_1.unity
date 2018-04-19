@@ -10958,6 +10958,11 @@ Prefab:
       propertyPath: m_CellSize.x
       value: 0.79
       objectReference: {fileID: 0}
+    - target: {fileID: 2569400266459824958, guid: 1d3849ddfb869f549acd605629f70a0b,
+        type: 2}
+      propertyPath: m_CellSize.y
+      value: 0.79
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d3849ddfb869f549acd605629f70a0b, type: 2}
   m_IsPrefabParent: 0
