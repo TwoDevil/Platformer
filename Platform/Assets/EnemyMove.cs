@@ -15,13 +15,24 @@ public class EnemyMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(XMoveDirection, 0));
+        //gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(XMoveDirection, 0) * EnemySpeed;
+        //if(hit.distance<0.7f)
+        //{
+        //    Flip();
+        //    if(hit.collider.gameObject.tag == "Player")
+        //    {
+        //        Destroy(hit.collider.gameObject);
+        //    }
+        //}
         RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(XMoveDirection, 0));
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(XMoveDirection, 0) * EnemySpeed;
         if (hit.collider.gameObject.tag == "Player" && hit.distance < 0.6f)
         {
             if (XMoveDirection < 0)
             {
-                hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce((Vector2.left+Vector2.up/2) * 1000);
+                hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce((Vector2.left + Vector2.up / 2) * 1000);
             }
             else
             {
@@ -36,7 +47,12 @@ public class EnemyMove : MonoBehaviour {
                 Flip();
             }
         }
-	}
+
+        if(gameObject.transform.position.y<-50)
+        {
+            Destroy(gameObject);
+        }
+    }
     void Flip()
     {
         if (XMoveDirection > 0)
