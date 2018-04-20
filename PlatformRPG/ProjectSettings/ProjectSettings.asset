@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 14
-  productGUID: 4a5ecc167782b204faccbbab76ae7989
+  productGUID: 27bdd3be26af568499ac57c2aa1a15c8
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 4
@@ -12,7 +12,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Platform
+  productName: PlatformRPG
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -557,14 +557,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Platform
+  metroPackageName: PlatformRPG
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Platform
+  metroApplicationDescription: PlatformRPG
   wsaImages: {}
   metroTileShortName: 
   metroCommandLineArgsFile: 
@@ -624,7 +624,6 @@ PlayerSettings:
   XboxOneSplashScreen: {fileID: 0}
   XboxOneAllowedProductIds: []
   XboxOnePersistentLocalStorageSize: 0
-  XboxOneXTitleMemory: 8
   xboxOneScriptCompiler: 0
   vrEditorSettings:
     daydream:
@@ -633,8 +632,8 @@ PlayerSettings:
   cloudServicesEnabled: {}
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 41f25d87-420b-423d-bce8-e3f4f3858ed8
-  projectName: Platform
+  cloudProjectId: 314ba477-d0c2-4686-9e88-183ea3a728f5
+  projectName: PlatformRPG
   organizationId: sasski
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
