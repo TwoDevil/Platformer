@@ -13,4 +13,16 @@ public class SettingMenu : MonoBehaviour {
     {
         SceneManager.LoadScene("Level_1");
     }
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+    public void Info()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+    public void Exit()
+    {
+        Exit();
+    }
 }
