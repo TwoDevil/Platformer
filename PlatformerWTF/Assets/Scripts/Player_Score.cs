@@ -18,7 +18,7 @@ public class Player_Score : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         timeLeft -= Time.deltaTime;
-        timeLeftUI.gameObject.GetComponent<Text>().text = ("Осталось времени: " + (int)timeLeft);
+        timeLeftUI.gameObject.GetComponent<Text>().text = ("Time left: " + (int)timeLeft);
         if (timeLeft < 0.1f) {
             SceneManager.LoadScene("Prototype_1");
         }
@@ -36,7 +36,18 @@ public class Player_Score : MonoBehaviour {
     private void CountScore(int score=0)
     {
         playerScore += score;
-        playerScoreUI.gameObject.GetComponent<Text>().text = ("Счет: " + playerScore);
+        playerScoreUI.gameObject.GetComponent<Text>().text = ("Score: " + playerScore);
+    }
+
+    private void OnTriggerEnter2D(Collider2D trig)
+    {
+        if(trig.gameObject.tag=="Coin")
+        {
+            CountScore(100);
+            Destroy(trig.gameObject);
+        }
+        Debug.Log("Touch end level");
+        //CountScore((int)timeLeft*10);
     }
 
 }
