@@ -7,7 +7,6 @@ public class Player_Move : MonoBehaviour {
 
     public int playerSpeed=10;
     private bool facingRight=false;
-    public int playerJumpPower=300;
     private float moveX;
     public Rigidbody2D playerRigidbody;
 
@@ -16,9 +15,10 @@ public class Player_Move : MonoBehaviour {
 
     void Start()
     {
+        Debug.Log(GlobalSetings.Jump.Value);
         isGround = true;
         isJumpFirst = true;
-           playerRigidbody = gameObject.GetComponent<Rigidbody2D>();
+        playerRigidbody = gameObject.GetComponent<Rigidbody2D>();
     }
 
 
@@ -64,7 +64,7 @@ public class Player_Move : MonoBehaviour {
     {
         //jumping
         GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpPower);
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * GlobalSetings.Jump.Value);
         if (isGround)
         {
             isGround = false;

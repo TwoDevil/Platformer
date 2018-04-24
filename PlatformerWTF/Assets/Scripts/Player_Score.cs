@@ -28,7 +28,7 @@ public class Player_Score : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Coin")
         {
-            CountScore(100);
+            CountScore(GlobalSetings.Money.Value);
             Destroy(collision.gameObject);
         }
 
@@ -43,7 +43,7 @@ public class Player_Score : MonoBehaviour {
     {
         if(trig.gameObject.tag=="Coin")
         {
-            CountScore(100);
+            CountScore(GlobalSetings.Money.Value);
             Destroy(trig.gameObject);
         }
         Debug.Log("Touch end level");

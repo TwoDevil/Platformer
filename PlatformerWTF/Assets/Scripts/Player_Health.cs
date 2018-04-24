@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Player_Health : MonoBehaviour {
 
-    public int health = 100;
+    public int health = GlobalSetings.HP.Value;
     public GameObject HealthBar;
     Sprite[] AllHealthBar;
     
@@ -24,7 +24,7 @@ public class Player_Health : MonoBehaviour {
 	}
     void Die()
     {
-        SceneManager.LoadScene("Level_1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void AddDamage(int i)
     {
@@ -38,7 +38,7 @@ public class Player_Health : MonoBehaviour {
     public void ChangeHp()
     {
 
-        if (health >= 100)
+        if (health >= GlobalSetings.HP.Value)
         {
             HealthBar.GetComponent<SpriteRenderer>().sprite = AllHealthBar[0];
         }
@@ -48,7 +48,7 @@ public class Player_Health : MonoBehaviour {
         }
         else
         {
-            HealthBar.GetComponent<SpriteRenderer>().sprite = AllHealthBar[Mathf.Abs(health / 10 - 11)];
+            HealthBar.GetComponent<SpriteRenderer>().sprite = AllHealthBar[Mathf.Abs(health / GlobalSetings.HP.Value * 10 - 11)];
         }
     }
 
