@@ -12,7 +12,7 @@ public class Player_Score : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        DataManagement.datamanagement.LoadData();
 	}
 	
 	// Update is called once per frame
@@ -35,8 +35,12 @@ public class Player_Score : MonoBehaviour {
     }
     private void CountScore(int score=0)
     {
+        Debug.Log(DataManagement.datamanagement.highscore);
         playerScore += score;
         playerScoreUI.gameObject.GetComponent<Text>().text = ("Score: " + playerScore);
+        DataManagement.datamanagement.highscore=playerScore;
+        DataManagement.datamanagement.SaveData();
+        Debug.Log(DataManagement.datamanagement.highscore);
     }
 
     private void OnTriggerEnter2D(Collider2D trig)
@@ -45,6 +49,11 @@ public class Player_Score : MonoBehaviour {
         {
             CountScore(GlobalSetings.Money.Value);
             Destroy(trig.gameObject);
+        }
+        if (trig.gameObject.tag == "EndLevel")
+        {
+            CountScore((int)timeLeft*100);
+            DataManagement.datamanagement.SaveData();
         }
         Debug.Log("Touch end level");
         //CountScore((int)timeLeft*10);
