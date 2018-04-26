@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 3373611}
   - component: {fileID: 3373610}
   - component: {fileID: 3373612}
+  - component: {fileID: 3373613}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -249,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 10
   playerRigidbody: {fileID: 0}
+  distanceToBottomOfPlayer: 1.51
   isGround: 0
   isJumpFirst: 0
 --- !u!114 &3373611
@@ -278,6 +280,23 @@ MonoBehaviour:
   playerScore: 0
   timeLeftUI: {fileID: 1238112519}
   playerScoreUI: {fileID: 653084608}
+--- !u!95 &3373613
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 3373605}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 140b23f27fcf8f64b8ce4e695442995e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &49728664
 GameObject:
   m_ObjectHideFlags: 0

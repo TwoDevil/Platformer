@@ -9,7 +9,7 @@ public class Player_Move : MonoBehaviour {
     private bool facingRight=false;
     private float moveX;
     public Rigidbody2D playerRigidbody;
-
+    public float distanceToBottomOfPlayer=1.3f;
     public bool isGround;
     public bool isJumpFirst;
 
@@ -39,26 +39,35 @@ public class Player_Move : MonoBehaviour {
             Jump();
         }
         //animation
-        //player direction
-        if(moveX<0.0f && facingRight==false)
+
+        if(moveX!=0)
         {
-            FlipPlayer();
+            GetComponent<Animator>().SetBool("IsRunning",true);
         }
-        else if (moveX > 0.0f && facingRight == true)
+        else
         {
-            FlipPlayer();
+            GetComponent<Animator>().SetBool("IsRunning", false);
+        }
+        //player direction
+        if(moveX<0.0f )
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if (moveX > 0.0f)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
         }
         //phisics
         playerRigidbody.velocity = new Vector2(moveX * playerSpeed, playerRigidbody.velocity.y);
     }
 
-     void FlipPlayer()
-    {
-        facingRight = !facingRight;
-        Vector2 localScale = gameObject.transform.localScale;
-        localScale.x *= -1;
-        transform.localScale = localScale;
-    }
+    // void FlipPlayer()
+    //{
+    //    facingRight = !facingRight;
+    //    Vector2 localScale = gameObject.transform.localScale;
+    //    localScale.x *= -1;
+    //    transform.localScale = localScale;
+    //}
 
     void Jump()
     {
@@ -77,7 +86,7 @@ public class Player_Move : MonoBehaviour {
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
         //Debug.Log("Player has collided with " + collision.gameObject.tag);
         //Debug.Log("Player has collided with " + collision.collider.name);
         if (collision.collider.gameObject.tag == "Ground")
@@ -86,19 +95,19 @@ public class Player_Move : MonoBehaviour {
             isJumpFirst = true;
         }
     }
-    
+
     void PlayerRayCast()
     {
         //ray up
         RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up);
-        if (rayUp.collider != null && rayUp.distance < 1.3f && rayUp.collider.name == "box2")
+        if (rayUp.collider != null && rayUp.distance < distanceToBottomOfPlayer && rayUp.collider.name == "box2")
         {
             Destroy(rayUp.collider.gameObject);
         }
 
         //ray down
         RaycastHit2D rayDawn = Physics2D.Raycast(transform.position, Vector2.down);
-        if (rayDawn.collider != null && rayDawn.distance < 1.3f && rayDawn.collider.gameObject.tag == "Enemy")
+        if (rayDawn.collider != null && rayDawn.distance < distanceToBottomOfPlayer && rayDawn.collider.gameObject.tag == "Enemy")
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * 500);
             rayDawn.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 200);
@@ -107,28 +116,12 @@ public class Player_Move : MonoBehaviour {
             rayDawn.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             rayDawn.collider.gameObject.GetComponent<EnemyMove>().enabled = false;
         }
-        if(rayDawn != null && rayDawn.collider != null && rayDawn.distance<0.9f && rayDawn.collider.gameObject.tag == "Enemy")
+        if(rayDawn != null && rayDawn.collider != null && rayDawn.distance< distanceToBottomOfPlayer && rayDawn.collider.gameObject.tag == "Enemy")
         {
             isGround = true;
         }
 
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
-        //if (hit.collider!=null)
-        //{
-        //    Debug.Log(hit.collider.gameObject.tag);
-        //    if (hit.distance < 1.3f && hit.collider.gameObject.tag == "Enemy")
-        //    {
-        //        GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpPower);
-        //        hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 200);
-        //        hit.collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 20;
-        //        hit.collider.gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
-        //        hit.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        //        hit.collider.gameObject.GetComponent<EnemyMove>().enabled = false;
-        //        isGround = true;
-        //        isJumpFirst = true;
-        //        Destroy(hit.collider.gameObject);
-        //    }
-        //}
+      
 
     }
 }
