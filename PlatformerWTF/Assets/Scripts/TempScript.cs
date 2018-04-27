@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class TempScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+    public float speed;
+    private float pos;
+    Renderer render;
+
+
+	void Start()
+    {
+        render = GetComponent<Renderer>();
+    }
 	// Update is called once per frame
 	void Update () {
-		
+        pos = +speed;
+        render.material.mainTextureOffset = new Vector2(pos,0);
 	}
 }
