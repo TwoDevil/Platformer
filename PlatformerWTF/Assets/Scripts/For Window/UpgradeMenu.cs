@@ -9,6 +9,7 @@ public class UpgradeMenu : MonoBehaviour {
     Skills CurentSkill;
     public GameObject levelUpgrade;
     public GameObject bonusValue;
+    public GameObject CountValue;
     public GameObject textSkills;
     public GameObject CurentPointLevel;
     public void SelectJump()
@@ -34,9 +35,10 @@ public class UpgradeMenu : MonoBehaviour {
     public void SelectSkill()
     {
         levelUpgrade.gameObject.GetComponent<Text>().text = ("Уровень навыка: " + CurentSkill.CurentSkillLevel + " \\ " + CurentSkill.MaxSkillLevel);
-        bonusValue.gameObject.GetComponent<Text>().text = ("Бонус уровня\\Текущее значение: " + CurentSkill.UpValue + " \\ " + CurentSkill.Value);
+        bonusValue.gameObject.GetComponent<Text>().text = ("Бонус уровня \\ Текущее значение: " + CurentSkill.UpValue + " \\ " + CurentSkill.Value);
+        CountValue.gameObject.GetComponent<Text>().text = ("Текущая стоимость \\ Подорожание: " + CurentSkill.CountValue + " \\ " + CurentSkill.CountValueUp);
         textSkills.gameObject.GetComponent<Text>().text = ("Название навыка: " + CurentSkill.Value);
-        CurentPointLevel.gameObject.GetComponent<Text>().text = ("Число свободных умений: " + GlobalSetings.CurentNumberPoint+ " \\ " + GlobalSetings.Level);
+        CurentPointLevel.gameObject.GetComponent<Text>().text = ("Число свободных денег: " + GlobalSetings.CountScore);
     }
     public void UpdateSkills()
     {

@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Player_Health : MonoBehaviour {
 
-    public int health = GlobalSetings.HP.Value;
-    public GameObject HealthBar;
-    Sprite[] AllHealthBar;
-    
+    private int health = GlobalSetings.HP.Value;
+    private InterfaceBattle interfaceBattle;
+
     // Use this for initialization
     void Start () {
-        AllHealthBar = Resources.LoadAll<Sprite>("Health_bar");
-        ChangeHp();
+        
+        interfaceBattle = GameObject.Find("InterfaceBattle").GetComponent<InterfaceBattle>();
+        interfaceBattle.ChangeHp(health);
     }
 	
 	// Update is called once per frame
@@ -29,27 +29,12 @@ public class Player_Health : MonoBehaviour {
     public void AddDamage(int i)
     {
         health -= i;
-        ChangeHp();
+        interfaceBattle.ChangeHp(health);
         if (health <= 0)
         {
             Die();
         }
     }
-    public void ChangeHp()
-    {
 
-        if (health >= GlobalSetings.HP.Value)
-        {
-            HealthBar.GetComponent<SpriteRenderer>().sprite = AllHealthBar[0];
-        }
-        else if(health <=0)
-        {
-            HealthBar.GetComponent<SpriteRenderer>().sprite = AllHealthBar[11];
-        }
-        else
-        {
-            HealthBar.GetComponent<SpriteRenderer>().sprite = AllHealthBar[Mathf.Abs(health / GlobalSetings.HP.Value * 10 - 11)];
-        }
-    }
 
 }

@@ -11,15 +11,15 @@ public class SettingMenu : MonoBehaviour {
     // Use this for initialization
     public void NewGame()
     {
-        SceneManager.LoadScene("Dima_scene");
+        SceneManager.LoadScene("LevelSelect");
     }
     public void LoadMenu()
     {
-        SceneManager.LoadScene("Settings");
+        SceneManager.LoadScene("Upgrade");
     }
     public void Info()
     {
-        SceneManager.LoadScene("Upgrade");
+        SceneManager.LoadScene("Settings");
     }
     public void Exit()
     {
