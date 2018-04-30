@@ -47,6 +47,7 @@ public class Player_Score : MonoBehaviour {
         {
             CountScore((int)interfaceBattle.timeLeft * 100);
             DataManagement.datamanagement.SaveData();
+            SceneManager.LoadScene("LevelSelect");
         }
         Debug.Log("Touch end level");
     }
