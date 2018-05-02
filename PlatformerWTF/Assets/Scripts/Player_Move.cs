@@ -12,13 +12,17 @@ public class Player_Move : MonoBehaviour {
     public float distanceToBottomOfPlayer=1.3f;
     public bool isGround;
     public bool isJumpFirst;
+    Animator animator;
+    Collider2D swordCol;
 
     void Start()
     {
         Debug.Log(GlobalSetings.Jump.Value);
         isGround = true;
         isJumpFirst = true;
+        animator = this.GetComponent<Animator>();
         playerRigidbody = gameObject.GetComponent<Rigidbody2D>();
+        swordCol = GameObject.Find("sword").GetComponent<Collider2D>();
     }
 
 
@@ -29,7 +33,17 @@ public class Player_Move : MonoBehaviour {
 
     }
 
-     void PlyerMove()
+
+    void Attack()
+    {
+        swordCol.enabled = true;
+    }
+    void NoAttack()
+    {
+        swordCol.enabled = false;
+        animator.ResetTrigger("attack");
+    }
+    void PlyerMove()
     {
         //controls
         moveX = Input.GetAxis("Horizontal");
@@ -37,6 +51,10 @@ public class Player_Move : MonoBehaviour {
         {
             if(isGround|| isJumpFirst)
             Jump();
+        }
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            animator.SetTrigger("attack");
         }
         //animation
 
@@ -52,10 +70,12 @@ public class Player_Move : MonoBehaviour {
         if(moveX<0.0f )
         {
             GetComponent<SpriteRenderer>().flipX = true;
+            GameObject.Find("sword").GetComponent<SpriteRenderer>().flipX=true;
         }
         else if (moveX > 0.0f)
         {
             GetComponent<SpriteRenderer>().flipX = false;
+            GameObject.Find("sword").GetComponent<SpriteRenderer>().flipX = false;
         }
         //phisics
         playerRigidbody.velocity = new Vector2(moveX * playerSpeed, playerRigidbody.velocity.y);
@@ -69,6 +89,7 @@ public class Player_Move : MonoBehaviour {
     //    transform.localScale = localScale;
     //}
 
+   
     void Jump()
     {
         //jumping
