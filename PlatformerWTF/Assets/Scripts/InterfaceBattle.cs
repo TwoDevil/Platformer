@@ -34,7 +34,7 @@ public class InterfaceBattle : MonoBehaviour {
         }
         else
         {
-            HealthBar.GetComponent<SpriteRenderer>().sprite = AllHealthBar[Mathf.Abs(health / GlobalSetings.HP.Value * 10 - 11)];
+            HealthBar.GetComponent<SpriteRenderer>().sprite = AllHealthBar[Mathf.Abs(health  * 10 / GlobalSetings.HP.Value - 11)];
         }
     }
 

@@ -29,6 +29,7 @@ public class Player_Health : MonoBehaviour {
     public void AddDamage(int i)
     {
         health -= i;
+        
         interfaceBattle.ChangeHp(health);
         if (health <= 0)
         {
