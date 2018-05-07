@@ -54,19 +54,19 @@ public class Player_Move : MonoBehaviour {
         if(attack)
         {
             animator.SetTrigger("attack");
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, fwd, 0.9f);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, fwd, 1.3f);
             if (hit.collider != null && hit.collider.name == "Enemy")
             {
                
                 Destroy(hit.collider.gameObject);
             }
-            RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), fwd, 0.9f);
+            RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), fwd, 1.3f);
             if (hit1.collider != null && hit1.collider.name == "Enemy")
             {
 
                 Destroy(hit1.collider.gameObject);
             }
-            RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1f), fwd, 0.9f);
+            RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1f), fwd, 1.3f);
             if (hit2.collider != null && hit2.collider.name == "Enemy")
             {
 
@@ -89,19 +89,19 @@ public class Player_Move : MonoBehaviour {
     void FixedUpdate()
     {
 
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x,transform.position.y), fwd, 1);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x,transform.position.y), fwd, 1f);
         if (hit.collider != null && hit.collider.name == "Ground" && isGround == false)
         {
             playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
         }
 
-        RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), fwd, 1);
+        RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), fwd, 1f);
         if (hit1.collider != null && hit1.collider.name == "Ground" && isGround == false)
         {
             playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
         }
 
-        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1f), fwd, 1);
+        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1f), fwd, 1f);
         if (hit2.collider != null && hit2.collider.name == "Ground" && isGround==false)
         {
             playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
