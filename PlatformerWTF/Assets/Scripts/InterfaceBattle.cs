@@ -8,6 +8,7 @@ public class InterfaceBattle : MonoBehaviour {
     public GameObject timeLeftUI;
     public GameObject playerScoreUI;
     public GameObject HealthBar;
+    public GameObject HealthBoss;
     Sprite[] AllHealthBar;
 
 
@@ -35,6 +36,22 @@ public class InterfaceBattle : MonoBehaviour {
         else
         {
             HealthBar.GetComponent<SpriteRenderer>().sprite = AllHealthBar[Mathf.Abs(health  * 10 / GlobalSetings.HP.Value - 11)];
+        }
+    }
+    public void ChangeHpBoss(int health)
+    {
+
+        if (health >= 200)
+        {
+            HealthBoss.GetComponent<SpriteRenderer>().sprite = AllHealthBar[0];
+        }
+        else if (health <= 0)
+        {
+            HealthBoss.GetComponent<SpriteRenderer>().sprite = AllHealthBar[11];
+        }
+        else
+        {
+            HealthBoss.GetComponent<SpriteRenderer>().sprite = AllHealthBar[Mathf.Abs(health / 20 - 11)];
         }
     }
 

@@ -29,7 +29,7 @@ public class SelectLevel : MonoBehaviour {
     }
     public void Level_B()
     {
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("Level_Boss");
     }
 
 
