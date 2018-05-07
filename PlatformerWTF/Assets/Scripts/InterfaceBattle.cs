@@ -19,7 +19,7 @@ public class InterfaceBattle : MonoBehaviour {
     }
     public void UpdateScore()
     {
-        playerScoreUI.gameObject.GetComponent<Text>().text = ("Score: " + GlobalSetings.CountScore);
+        playerScoreUI.gameObject.GetComponent<Text>().text = ("Money: " + GlobalSetings.CountScore);
     }
     public void ChangeHp(int health)
     {
