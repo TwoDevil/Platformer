@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Move : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class Player_Move : MonoBehaviour {
     Animator animator;
     AnimatorStateInfo a;
     BoxCollider2D playerColl;
+    Vector2 fwd;
 
 
 
@@ -29,6 +31,7 @@ public class Player_Move : MonoBehaviour {
         playerRigidbody = gameObject.GetComponent<Rigidbody2D>();
        // animator.SetTrigger("attack");
         playerColl = GetComponent<BoxCollider2D>();
+        fwd = transform.TransformDirection(Vector2.right);//Для атаки
     }
 
 
@@ -40,31 +43,10 @@ public class Player_Move : MonoBehaviour {
         PlyerMove();
         PlayerRayCast();
         HandleInput();
-       // UpdateRay();
-    }
-
-
-
-    void UpdateRay()
-    {
-        // Bit shift the index of the layer (8) to get a bit mask
-        int layerMask = 1 << 8;
-
-        // This would cast rays only against colliders in layer 8.
-        // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
-        layerMask = ~layerMask;
-
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, Mathf.Infinity, layerMask))
+        // UpdateRay();
+        if (Input.GetKey(KeyCode.Escape))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 1000, Color.white);
-            Debug.Log("Did not Hit");
+            SceneManager.LoadScene("LevelSelect");
         }
     }
 
@@ -73,6 +55,42 @@ public class Player_Move : MonoBehaviour {
         if(attack)
         {
             animator.SetTrigger("attack");
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, fwd, 1.3f);
+            RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), fwd, 1.3f);
+            RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1f), fwd, 1.3f);
+            if (hit.collider != null && hit.collider.gameObject.tag == "Enemy")
+            {
+                Debug.Log(hit.collider.gameObject.name);
+                BossHP hp = hit.collider.gameObject.GetComponent<BossHP>();
+                if (hp != null) { hp.AddDamage(GlobalSetings.Damage.Value); }
+                else
+                {
+                   
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+            else if (hit1.collider != null && hit1.collider.gameObject.tag == "Enemy")
+            {
+                Debug.Log(hit1.collider.gameObject.name);
+                BossHP hp = hit1.collider.gameObject.GetComponent<BossHP>();
+                if (hp != null) { hp.AddDamage(GlobalSetings.Damage.Value); }
+                else
+                {
+                   
+                    Destroy(hit1.collider.gameObject);
+                }
+            }
+            else if (hit2.collider != null && hit2.collider.gameObject.tag == "Enemy")
+            {
+                Debug.Log(hit2.collider.gameObject.name);
+                BossHP hp = hit2.collider.gameObject.GetComponent<BossHP>();
+                if (hp != null) { hp.AddDamage(GlobalSetings.Damage.Value); }
+                else
+                {
+                    
+                    Destroy(hit2.collider.gameObject);
+                }
+            }
         }
     }
     void HandleInput()
@@ -86,6 +104,32 @@ public class Player_Move : MonoBehaviour {
             
         }
     }
+
+    void FixedUpdate()
+    {
+
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x,transform.position.y), fwd, 1f);
+        if (hit.collider != null && hit.collider.name == "Ground" && isGround == false)
+        {
+            playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
+        }
+
+        RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), fwd, 1f);
+        if (hit1.collider != null && hit1.collider.name == "Ground" && isGround == false)
+        {
+            playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
+        }
+
+        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1f), fwd, 1f);
+        if (hit2.collider != null && hit2.collider.name == "Ground" && isGround==false)
+        {
+            playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
+        }
+
+        //Debug.DrawLine(transform.position, new Vector3(1,0,0), Color.red, 2f, false);
+    }
+
+
     void PlyerMove()
     {
         //controls
@@ -116,11 +160,15 @@ public class Player_Move : MonoBehaviour {
         if (moveX < 0.0f)
         {
             GetComponent<SpriteRenderer>().flipX = true;
+            fwd = transform.TransformDirection(Vector2.left);
+
 
         }
         else if (moveX > 0.0f)
         {
             GetComponent<SpriteRenderer>().flipX = false;
+            fwd = transform.TransformDirection(Vector2.right);
+          
 
         }
         //phisics
@@ -144,13 +192,16 @@ public class Player_Move : MonoBehaviour {
    void ResetValues()
     {
         attack = false;
+
         
+            
+           
         //playerColl.size = new Vector2(playerColl.offset.x - 2, playerColl.offset.y);
     }
     void Jump()
     {
         //jumping
-        //GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * GlobalSetings.Jump.Value);
         if (isGround)
         {
@@ -176,13 +227,13 @@ public class Player_Move : MonoBehaviour {
 
 
 
-
-        a = animator.GetCurrentAnimatorStateInfo(0);
-        //Debug.Log("Player has collided with " + a.IsName("KnightAttack"));
-        if (collision.collider.gameObject.tag == "Enemy" && a.IsName("KnightAttack"))
-        {
-            Destroy(collision.collider.gameObject);
-        }
+        //атака
+        //a = animator.GetCurrentAnimatorStateInfo(0);
+        ////Debug.Log("Player has collided with " + a.IsName("KnightAttack"));
+        //if (collision.collider.gameObject.tag == "Enemy" && a.IsName("KnightAttack"))
+        //{
+        //    Destroy(collision.collider.gameObject);
+        //}
     }
 
     void PlayerRayCast()

@@ -134,7 +134,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1070640704489802}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0.13000011, z: -0.234375}
+  m_LocalPosition: {x: 9.95, y: 0.18, z: -0.234375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4362533315295772}
@@ -295,6 +295,7 @@ MonoBehaviour:
   timeLeftUI: {fileID: 1274745309246336}
   playerScoreUI: {fileID: 1868389211520510}
   HealthBar: {fileID: 1432144729909206}
+  HealthBoss: {fileID: 1070640704489802}
 --- !u!114 &114921000427295258
 MonoBehaviour:
   m_ObjectHideFlags: 1
